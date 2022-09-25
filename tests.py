@@ -21,6 +21,7 @@ class TestBooksCollector:
         assert len(collector.get_books_rating()) == 2
 
     # напиши свои тесты ниже
+<<<<<<< HEAD
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
     from main import BooksCollector
 
@@ -125,3 +126,6 @@ class TestBooksCollector:
             collector11.favorites = collector11.get_list_of_favorites_books()
             assert collector11.favorites == ['Преступление и наказание']
 
+=======
+    # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+>>>>>>> 83dd2b80073723540cc9142a3e3735b86b3fa588
