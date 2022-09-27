@@ -26,15 +26,16 @@ class TestBooksCollector:
 
     # Проверка init books_rating
 
-    def test_default_book_rating_true(self):
-        collector0 = BooksCollector()
-        assert collector0.books_rating == {}
+
+    def test_default_favorites_true(self):
+        collector = BooksCollector()
+        assert collector.get_books_rating() == {}
 
     # Проверка init favorites
 
     def test_default_favorites_true(self):
-        collector1 = BooksCollector()
-        assert collector1.favorites == []
+        collector = BooksCollector()
+        assert collector.get_list_of_favorites_books() == []
 
     # Проверка добавления книг.
 
@@ -47,86 +48,86 @@ class TestBooksCollector:
     # Нельзя добавить одну и ту же книгу дважды.
 
     def test_add_book_two_times_true(self):
-        collector2 = BooksCollector()
-        collector2.add_new_book('Война и мир')
-        collector2.add_new_book('Война и мир')
-        assert len(collector2.get_books_rating()) == 1
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.add_new_book('Война и мир')
+        assert len(collector.get_books_rating()) == 1
 
     # Нельзя выставить рейтинг книге, которой нет в списке
 
     def test_add_rating_for_book_not_in_list_true(self):
-        collector3 = BooksCollector()
-        collector3.add_new_book('Война и мир')
-        collector3.set_book_rating('Преступление и наказание', 6)
-        assert collector3.get_book_rating('Преступление и наказани') == None
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_rating('Преступление и наказание', 6)
+        assert collector.get_book_rating('Преступление и наказани') == None
 
     # Позитивная проверка выставления рейтинга
 
     def test_set_book_rating_six_rating_increased(self):
-        collector4 = BooksCollector()
-        collector4.add_new_book('Война и мир')
-        collector4.set_book_rating('Война и мир', 6)
-        assert collector4.get_book_rating('Война и мир') == 6
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_rating('Война и мир', 6)
+        assert collector.get_book_rating('Война и мир') == 6
 
     # Нельзя выставить рейтинг меньше 1.
 
     def test_cant_set_books_rating_zero_true(self):
-        collector5 = BooksCollector()
-        collector5.add_new_book('Война и мир')
-        collector5.set_book_rating('Война и мир', 0)
-        assert collector5.get_book_rating('Война и мир') != 0
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_rating('Война и мир', 0)
+        assert collector.get_book_rating('Война и мир') != 0
 
     # Нельзя выставить рейтинг больше 10.
 
     def test_cant_set_books_rating_ten_true(self):
-        collector6 = BooksCollector()
-        collector6.add_new_book('Война и мир')
-        collector6.set_book_rating('Война и мир', 11)
-        assert collector6.get_book_rating('Война и мир') != 11
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.set_book_rating('Война и мир', 11)
+        assert collector.get_book_rating('Война и мир') != 11
 
     # У не добавленной книги нет рейтинга.
 
     def test_no_added_book_no_rating_true(self):
-        collector7 = BooksCollector()
-        collector7.add_new_book('Война и мир')
-        assert collector7.get_book_rating('Преступление и наказание') == None
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        assert collector.get_book_rating('Преступление и наказание') == None
 
     # добавляем книгу в Избранное
 
     def test_add_book_in_favorites_true(self):
-        collector8 = BooksCollector()
-        collector8.add_new_book('Война и мир')
-        collector8.add_book_in_favorites('Война и мир')
-        assert collector8.get_list_of_favorites_books() == ['Война и мир']
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.add_book_in_favorites('Война и мир')
+        assert collector.get_list_of_favorites_books() == ['Война и мир']
 
     # удаляем книгу из Избранного
 
     def test_delete_book_from_favorites_true(self):
-        collector9 = BooksCollector()
-        collector9.add_new_book('Война и мир')
-        collector9.add_book_in_favorites('Война и мир')
-        collector9.delete_book_from_favorites('Война и мир')
-        assert collector9.get_list_of_favorites_books() == []
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.add_book_in_favorites('Война и мир')
+        collector.delete_book_from_favorites('Война и мир')
+        assert collector.get_list_of_favorites_books() == []
 
     # выводим список книг с определенным рейтингом
 
     def test_get_books_with_specific_rating_get_books_with_rating_6_true(self):
-        collector10 = BooksCollector()
-        collector10.add_new_book('Преступление и наказание')
-        collector10.add_new_book('Война и мир')
-        collector10.set_book_rating('Война и мир', 8)
-        collector10.set_book_rating('Преступление и наказание', 6)
-        books_with_specific_rating = collector10.get_books_with_specific_rating(8)
+        collector = BooksCollector()
+        collector.add_new_book('Преступление и наказание')
+        collector.add_new_book('Война и мир')
+        collector.set_book_rating('Война и мир', 8)
+        collector.set_book_rating('Преступление и наказание', 6)
+        books_with_specific_rating = collector.get_books_with_specific_rating(8)
         assert books_with_specific_rating[0] == 'Война и мир'
 
     # получаем список Избранных книг
 
     def test_list_of_favorites_books_true(self):
-        collector11 = BooksCollector()
-        collector11.add_new_book('Война и мир')
-        collector11.add_book_in_favorites('Война и мир')
-        collector11.favorites = collector11.get_list_of_favorites_books()
-        assert collector11.get_list_of_favorites_books() == ['Война и мир']
+        collector = BooksCollector()
+        collector.add_new_book('Война и мир')
+        collector.add_book_in_favorites('Война и мир')
+        collector.favorites = collector.get_list_of_favorites_books()
+        assert collector.get_list_of_favorites_books() == ['Война и мир']
 
 
 
